@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using RestaranApp.Dto;
 using RestaranApp.Entities;
 using System;
+using System.IO.Pipes;
 using System.Xml.Linq;
 
 namespace RestaranApp.Services
@@ -14,6 +15,7 @@ namespace RestaranApp.Services
         public Task<Order> GetByUuid(string uuid);
         public Task<List<Order>> GetAll();
         public Task<List<Order>> GetByUser(string useruuid);
+        public Task<List<Order>> GetByRestaran(string restaranuuid);
     };
 
     public class OrderService : IOrderService
@@ -106,6 +108,20 @@ namespace RestaranApp.Services
         public async Task<List<Order>> GetByUser(string useruuid)
         {
             var orders = await _context.Order.Where(o => o.User.Uuid == useruuid).ToListAsync();
+            /*  равносильно join запросу:
+             *  select * from Orders o
+             *  join Users u on u.Id = o.UserId
+             *  where u.Username = "username";
+             */
+
+            return orders;
+        }
+
+        public async Task<List<Order>> GetByRestaran(string restaranuuid)
+        {
+            var orders = await _context.Order
+                .Where(o => o.Restaran.Uuid == restaranuuid)
+                .ToListAsync();
             /*  равносильно join запросу:
              *  select * from Orders o
              *  join Users u on u.Id = o.UserId

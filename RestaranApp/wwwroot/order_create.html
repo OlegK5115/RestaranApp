@@ -5,6 +5,20 @@
     <title></title>
 </head>
 <body>
+    <form action="/orders/create" method="post">
+        <label for="useruuid">useruuid</label><br>
+        <input type="text" name="useruuid" required><br><br>
 
+        <label for="restaranuuid">restaranuuid</label><br>
+        <input type="text" name="restaranuuid" required><br><br>
+
+        <label for="starttime">starttime</label><br>
+        <input type="text" name="starttime" required><br><br>
+
+        <label for="endtime">endtime</label><br>
+        <input type="text" name="endtime" required><br><br>
+
+        <button type="submit">send</button>
+    </form>
 </body>
 </html>

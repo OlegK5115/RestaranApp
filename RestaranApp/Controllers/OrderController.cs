@@ -35,7 +35,7 @@ namespace RestaranApp.Controllers
         }
 
         [HttpPost("create")]
-        public async Task Create([FromBody] CreateOrderDto o)
+        public async Task Create(CreateOrderDto o)
         {
             await _orderService.Create(o);
         }
@@ -46,15 +46,21 @@ namespace RestaranApp.Controllers
             return Json(ParseOrders(await _orderService.GetAll()));
         }
 
-        [HttpGet("{uuid}")]
+        [HttpGet("/id/{uuid}")]
         public async Task<IActionResult> GetByUuid(string uuid)
         {
             return Json(ParseOrder(await _orderService.GetByUuid(uuid)));
         }
 
-        [HttpGet("{username}")]
-        public async Task<IActionResult> GetAllByUser(string username) {
-            return Json(ParseOrders(await _orderService.GetByUser(username)));
+        [HttpGet("uid/{useruuid}")]
+        public async Task<IActionResult> GetAllByUser(string useruuid) {
+            return Json(ParseOrders(await _orderService.GetByUser(useruuid)));
+        }
+
+        [HttpGet("rid/{restaranuuid}")]
+        public async Task<IActionResult> GetAllByRestaran(string restaranuuid)
+        {
+            return Json(ParseOrders(await _orderService.GetByRestaran(restaranuuid)));
         }
     }
 }

@@ -33,19 +33,19 @@ namespace RestaranApp.Controllers
         }
 
         [HttpPost("create")] // url -- /user/create
-        public async Task Create([FromBody] CreateUserDto u)
+        public async Task Create(CreateUserDto u)
         {
             await _userService.Create(u);
         }
 
         [HttpPost("update")] // url -- /user/create
-        public async Task Update([FromBody] UpdateUserDto u)
+        public async Task Update(UpdateUserDto u)
         {
             await _userService.Update(u);
         }
 
         [HttpPost("delete")] // url -- /user/create
-        public async Task Delete([FromBody] DeleteUserDto u)
+        public async Task Delete(DeleteUserDto u)
         {
             await _userService.Delete(u.Uuid);
         }
